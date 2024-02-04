@@ -1,0 +1,24 @@
+package com.matei.application.rest.model.comment;
+
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class CommentDto {
+
+    @NotNull
+    private Long id;
+    @NotNull
+    private String text;
+
+    @NotNull
+    private String createdBy;
+    @NotNull
+    private long createdDate;
+}

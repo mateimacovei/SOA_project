@@ -91,8 +91,8 @@ public class UserService {
                 throw conflict("Can not delete the last admin user");
             }
         }
-        postsService.handleDeletedUser(currentUser.getUsername());
-        userRepository.deleteById(currentUser.getUsername());
+        postsService.handleDeletedUser(userToDelete);
+        userRepository.deleteById(userToDelete);
     }
 
     // for the following methods, it has already been confirmed that the current user is admin
