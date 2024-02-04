@@ -48,7 +48,11 @@ public class CommentService {
         var post = postsService.findOne(createDto.getPostId());
         var toSave = Comment.builder().commentText(createDto.getText()).replyingTo(post).build();
         CommentDto commentDto = mapToDto(commentRepository.save(toSave));
-        notificationService.sendNotification(post.getCreatedBy(), "Someone left a comment on your post");
+        var currentUser = UserAuthorizationService.getCurrentUserDetails().getUsername();
+        var postCreator = post.getCreatedBy();
+        if (!currentUser.equals(postCreator)) { // I don't want to get notifications for myself
+            notificationService.sendNotification(postCreator, currentUser + " left a comment on your post");
+        }
         return commentDto;
     }
 

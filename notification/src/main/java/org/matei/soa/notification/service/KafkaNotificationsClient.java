@@ -17,7 +17,7 @@ public class KafkaNotificationsClient {
 
     @KafkaListener(topics = KAFKA_TOPIC_NAME)
     public void processMessage(String userAndMessage) {
-        var split = userAndMessage.split("/", 1);
+        var split = userAndMessage.split("/", 2);
         if (split.length < 2) {
             throw internalServerError("Could not split user and message");
         }
@@ -28,6 +28,7 @@ public class KafkaNotificationsClient {
             throw internalServerError("Notification can not have empty components");
         }
 
+        log.info("Received message {} for user {}", message, user);
         serverNotificationService.sendNotification(user, message);
     }
 }
