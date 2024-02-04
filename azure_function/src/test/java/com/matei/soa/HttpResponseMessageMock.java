@@ -1,4 +1,4 @@
-package com.matei;
+package com.matei.soa;
 
 import com.microsoft.azure.functions.*;
 

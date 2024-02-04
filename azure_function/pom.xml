@@ -2,20 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.matei</groupId>
-    <artifactId>soa.azure.function</artifactId>
+    <groupId>com.matei.soa</groupId>
+    <artifactId>azure_function</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Azure Java Functions</name>
 
     <properties>
-        <jjwt.version>0.12.3</jjwt.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
-        <azure.functions.maven.plugin.version>1.24.0</azure.functions.maven.plugin.version>
-        <azure.functions.java.library.version>2.2.0</azure.functions.java.library.version>
-        <functionAppName>soa.azure.function-20240119163815232</functionAppName>
+        <java.version>17</java.version>
+        <azure.functions.maven.plugin.version>1.31.0</azure.functions.maven.plugin.version>
+        <azure.functions.java.library.version>3.1.0</azure.functions.java.library.version>
+        <functionAppName>soa_project_azure_function</functionAppName>
+        <jjwt.version>0.12.3</jjwt.version>
     </properties>
 
     <dependencies>
@@ -24,6 +24,7 @@
             <artifactId>azure-functions-java-library</artifactId>
             <version>${azure.functions.java.library.version}</version>
         </dependency>
+
 
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
@@ -42,7 +43,6 @@
             <version>${jjwt.version}</version>
             <scope>runtime</scope>
         </dependency>
-
         <!-- Test -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -94,7 +94,7 @@
                     <runtime>
                         <!-- runtime os, could be windows, linux or docker-->
                         <os>windows</os>
-                        <javaVersion>8</javaVersion>
+                        <javaVersion>17</javaVersion>
                     </runtime>
                     <appSettings>
                         <property>

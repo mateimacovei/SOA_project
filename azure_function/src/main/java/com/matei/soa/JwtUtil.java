@@ -1,6 +1,7 @@
-package com.matei;
+package com.matei.soa;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 
 import javax.crypto.SecretKey;
 

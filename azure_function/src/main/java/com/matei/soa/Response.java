@@ -1,4 +1,5 @@
-package com.matei;
+package com.matei.soa;
+
 public class Response {
     private String value;
 
