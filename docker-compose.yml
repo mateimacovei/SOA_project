@@ -85,12 +85,12 @@ services:
     ports:
       - "4204:4204"
 
-#  frontend_users:
-#    build:
-#      context: frontend_users
-#      dockerfile: Dockerfile
-#    ports:
-#      - "4200:4200"
+  frontend_users:
+    build:
+      context: frontend_users
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
 
   rev_proxy:
     build:
