@@ -6,6 +6,11 @@ import {userComponentIsLoggedInGuard} from "./guard/user-component-is-logged-in.
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
     path: 'login',
     component: LoginPageComponent,
     title: 'Login'
