@@ -37,7 +37,6 @@ public class CustomWebSocketHandler extends AbstractWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
-        var principal = session.getPrincipal();
-        sessions.remove(principal.getName());
+        sessions.entrySet().removeIf(x -> x.getValue().getId().equals(session.getId()));
     }
 }

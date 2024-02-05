@@ -52,6 +52,8 @@ services:
   application_1:
     build:
       context: application
+      args:
+        SOA_APPLICATION_PORT: 4202
       dockerfile: Dockerfile
     depends_on:
       - postgres
@@ -59,12 +61,12 @@ services:
       - kafka
     ports:
       - "4202:4202"
-    environment:
-      - SOA_APPLICATION_PORT:4202
   
   application_2:
     build:
       context: application
+      args:
+        SOA_APPLICATION_PORT: 4203
       dockerfile: Dockerfile
     depends_on:
       - postgres
@@ -72,8 +74,7 @@ services:
       - kafka
     ports:
       - "4203:4203"
-    environment:
-      - SOA_APPLICATION_PORT:4203
+
 
   notifications:
     build:
@@ -96,7 +97,7 @@ services:
       context: nginx
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "8080:80"
 
 
 volumes:
