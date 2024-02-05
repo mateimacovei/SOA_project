@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {PaginationListComponent} from "../pagination-list/pagination-list.component";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {ToastsAreaComponent} from "../toasts-area/toasts-area.component";
@@ -24,7 +24,7 @@ import {WebsocketListenerService} from "../../service/websocket-listener.service
   templateUrl: './main-view.component.html',
   styleUrl: './main-view.component.scss'
 })
-export class MainViewComponent {
+export class MainViewComponent implements OnDestroy {
 
   postsInPage: Post[] = [];
   nrOfElements = 0;
@@ -41,6 +41,10 @@ export class MainViewComponent {
     postApi.getPostsInPage(0, data => this.postsInPage = data);
   }
 
+  ngOnDestroy(): void {
+    this.socketService.close();
+  }
+
   handleNewSelectedPage(newPage: number) {
     // the order for the paginator starts from 1, but for the backend api the pageIndex starts from 0
     this.postApi.getPostsInPage(newPage - 1, data => this.postsInPage = data);
@@ -53,7 +57,7 @@ export class MainViewComponent {
     if (text.length > 0) {
       //   do stuff
 
-      this.postApi.addNewPost({text: text},data=>{
+      this.postApi.addNewPost({text: text}, data => {
         // add the response to the top of the posts list
         this.postsInPage.unshift(data);
         this.newPostForm.controls['newPostTextArea'].setValue('');

@@ -11,7 +11,7 @@ import {UserRoleToken} from "../../login/interfaces/Interfaces";
 })
 export class PostApiService {
 
-  URL = 'http://localhost:4202/post';
+  URL = 'http://localhost:8080/backend/application/post';
 
   constructor(private toastService: ToastService, private http: HttpClient, private router: Router) {
   }

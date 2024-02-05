@@ -10,7 +10,7 @@ import {lastValueFrom} from "rxjs";
 })
 export class CommentApiService {
 
-  URL = 'http://localhost:4202/comment';
+  URL = 'http://localhost:8080/backend/application/comment';
 
   constructor(private toastService: ToastService, private http: HttpClient, private router: Router) {
   }

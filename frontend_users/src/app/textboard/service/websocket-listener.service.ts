@@ -6,19 +6,25 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class WebsocketListenerService {
+  private socket: WebSocket | null;
 
   constructor(toastsService: ToastService) {
 
     const auth: string | null = localStorage.getItem('token');
     if (auth == null) {
       console.error("auth token was null during websocket instantiation");
+      this.socket=null;
     } else {
-      const socket = new WebSocket('ws://localhost:4204/ws/notifications?token=' + auth);
+      this.socket = new WebSocket('ws://localhost:8080/backend/notifications/ws/notifications?token=' + auth);
 
-      socket.onmessage = (message => {
+      this.socket.onmessage = (message => {
         const messageText: string = message.data.toString();
         toastsService.show("Notification", messageText);
       })
     }
+  }
+
+  close(){
+    this.socket?.close();
   }
 }

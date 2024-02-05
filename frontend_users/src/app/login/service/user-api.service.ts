@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class UserApiService {
 
-  URL = 'http://localhost:4201/user';
+  URL = 'http://localhost:8080/backend/users/user';
 
   constructor(private toastService: UserToastService, private http: HttpClient, private router: Router) {
   }
