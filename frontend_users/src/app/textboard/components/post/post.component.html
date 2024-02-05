@@ -1,0 +1,25 @@
+<div class="row m-2">
+
+  <div class="col border border-primary rounded-3">
+    <div class="row ">
+      <div class="col mb-3">
+        <figure class="start">
+          <blockquote class="blockquote">
+            <p>{{ post.createdBy }}</p>
+          </blockquote>
+          <figcaption class="blockquote-footer">
+            {{ getCreatedDate()| date: 'short' }}
+          </figcaption>
+        </figure>
+
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled readonly
+                  [value]="post.text"></textarea>
+      </div>
+      <div class="row">
+        <button class="btn btn-link" [routerLink]="['/textboard/post', post.id]">View post</button>
+      </div>
+    </div>
+
+
+  </div>
+</div>

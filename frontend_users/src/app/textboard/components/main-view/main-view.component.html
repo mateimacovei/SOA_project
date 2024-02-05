@@ -1,0 +1,78 @@
+<div id="mainViewParentDiv">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary" id="navBarParentDiv">
+    <div class="container-fluid">
+      <a class="navbar-brand">TextBoard</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" [routerLink]="['/user/management']">Your account</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col">
+        <ul *ngFor="let currentPost of postsInPage">
+          <app-post [post]="currentPost"></app-post>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <app-pagination-list [nrOfElements]="nrOfElements"
+                             (newSelectedPage)="handleNewSelectedPage($event)"></app-pagination-list>
+      </div>
+    </div>
+  </div>
+
+
+  <!--  floating action button-->
+  <div>
+    <span class="floating-container">
+      <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Make new post
+      </button>
+
+    </span>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New post</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <div [formGroup]="newPostForm" class="form-floating">
+                  <textarea class="form-control" placeholder="Write your thoughts" id="newPostTextField"
+                            formControlName="newPostTextArea"></textarea>
+                  <label for="newPostTextField">Write your thoughts</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="newPost()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  Toast area-->
+  <app-toasts-area aria-live="polite" aria-atomic="true"></app-toasts-area>
+</div>

@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+      <div class="row m-5">
+        <div class="col d-flex justify-content-center">
+          <h2>Hello, {{ username }}</h2>
+        </div>
+      </div>
+
+      <div *ngIf="hasAdminRole()" class="row m-5">
+        <hr/>
+        <div class="col">
+          <div class="row">
+            <div class="col d-flex justify-content-center">
+              <h2>Admin actions</h2>
+            </div>
+          </div>
+
+          <div class="row m-3">
+            <div class="col" [formGroup]="userForAdminAction">
+              <div class="form-floating">
+                <input type="text" class="form-control" id="userToPerformActionOn" placeholder="user"
+                       formControlName="username">
+                <label for="userToPerformActionOn">Input a username</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col d-flex justify-content-center">
+              <button class="btn btn-primary" type="button" (click)="addAdminRole()">Add admin role</button>
+            </div>
+            <div class="col d-flex justify-content-center">
+              <button class="btn btn-primary" type="button" (click)="removeAdminRole()">Remove admin role</button>
+            </div>
+            <div class="col d-flex justify-content-center">
+              <button class="btn btn-primary" type="button" (click)="deleteUser()">Delete user</button>
+            </div>
+          </div>
+        </div>
+        <hr/>
+      </div>
+
+      <div class="row">
+        <div class="col d-flex justify-content-center">
+          <button class="btn btn-primary" type="button" (click)="logout()">Logout</button>
+        </div>
+        <div class="col d-flex justify-content-center">
+          <button class="btn btn-primary" type="button" (click)="deleteAccount()">Delete account</button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+<!-- go back-->
+<div>
+    <span class="floating-container">
+      <a class="nav-link active" aria-current="page" [routerLink]="['/textboard']">Go back to application</a>
+    </span>
+</div>
+
+<!--  Toast area-->
+<app-user-toasts-area aria-live="polite" aria-atomic="true"></app-user-toasts-area>

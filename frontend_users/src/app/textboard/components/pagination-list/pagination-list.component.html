@@ -1,0 +1,12 @@
+<div>
+  <hr/>
+  <p>View posts on page:</p>
+
+  <div class="row">
+    <ngb-pagination [collectionSize]="nrOfElements" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                    (pageChange)="selectionChanged($event)" [pageSize]="50"/>
+  </div>
+
+
+  <hr/>
+</div>

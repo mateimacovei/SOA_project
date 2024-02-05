@@ -4,8 +4,8 @@ services:
   rabbitmq:
     image: rabbitmq:management
     ports:
-      - 5672:5672
-      - 15672:15672
+      - "5672:5672"
+      - "15672:15672"
 
   postgres:
     image: postgres
@@ -13,7 +13,9 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
     ports:
-      - 5432:5432
+      - "5432:5432"
+    volumes:
+      - soa_project_db:/var/lib/postgresql/data
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -21,14 +23,14 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
     ports:
-      - 22181:2181
+      - "22181:2181"
   
   kafka:
     image: confluentinc/cp-kafka:latest
     depends_on:
       - zookeeper
     ports:
-      - 29092:29092
+      - "29092:29092"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -45,4 +47,58 @@ services:
       - postgres
       - rabbitmq
     ports:
-      - 4201:4201
+      - "4201:4201"
+
+  application_1:
+    build:
+      context: application
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+      - rabbitmq
+      - kafka
+    ports:
+      - "4202:4202"
+    environment:
+      - SOA_APPLICATION_PORT:4202
+  
+  application_2:
+    build:
+      context: application
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+      - rabbitmq
+      - kafka
+    ports:
+      - "4203:4203"
+    environment:
+      - SOA_APPLICATION_PORT:4203
+
+  notifications:
+    build:
+      context: notification
+      dockerfile: Dockerfile
+    depends_on:
+      - kafka
+    ports:
+      - "4204:4204"
+
+#  frontend_users:
+#    build:
+#      context: frontend_users
+#      dockerfile: Dockerfile
+#    ports:
+#      - "4200:4200"
+
+  rev_proxy:
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+
+
+volumes:
+  soa_project_db:
+    driver: local
