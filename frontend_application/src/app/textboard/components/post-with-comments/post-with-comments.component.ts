@@ -1,12 +1,11 @@
-import {Component} from '@angular/core';
-import {Comment, Post} from "../../interfaces/application-interfaces";
+import {Component, Inject} from '@angular/core';
+import {Comment, Post, Role} from "../../interfaces/application-interfaces";
 import {PostApiService} from "../../service/post-api.service";
 import {CommentApiService} from "../../service/comment-api.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ToastsAreaComponent} from "../toasts-area/toasts-area.component";
-import {DatePipe, NgForOf, NgIf} from "@angular/common";
+import {DatePipe, DOCUMENT, NgForOf, NgIf} from "@angular/common";
 import {PostComponent} from "../post/post.component";
-import {Role} from "../../../login/interfaces/Interfaces";
 import {ToastService} from "../../service/toast.service";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 
@@ -38,7 +37,7 @@ export class PostWithCommentsComponent {
   modalForm: FormGroup;
   postTextForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private postApi: PostApiService, private commentsApi: CommentApiService, private router: Router, private activatedRoute: ActivatedRoute, private toastsService: ToastService) {
+  constructor(private fb: FormBuilder, private postApi: PostApiService, private commentsApi: CommentApiService, private router: Router, private activatedRoute: ActivatedRoute, private toastsService: ToastService,  @Inject(DOCUMENT) private document: Document) {
     this.modalForm = this.fb.group({
       modalTextArea: ['']
     })
@@ -51,7 +50,8 @@ export class PostWithCommentsComponent {
     const loggedInUser = localStorage.getItem('username');
     const loggedInRole = localStorage.getItem('role');
     if (loggedInUser == null || loggedInRole == null) {
-      this.router.navigate(['/user/login']);
+      // this.router.navigate(['/user/login']);
+      this.document.location.href = 'http://localhost:8080/application/user/user/login';
     } else {
       this.username = loggedInUser;
       this.role = Role[loggedInRole as keyof typeof Role];

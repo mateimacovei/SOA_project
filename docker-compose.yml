@@ -92,6 +92,13 @@ services:
     ports:
       - "4200:4200"
 
+  frontend_application:
+    build:
+      context: frontend_application
+      dockerfile: Dockerfile
+    ports:
+      - "4100:4100"
+
   rev_proxy:
     build:
       context: nginx

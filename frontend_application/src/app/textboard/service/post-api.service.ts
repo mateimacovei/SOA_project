@@ -4,7 +4,6 @@ import {ToastService} from "./toast.service";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {lastValueFrom} from "rxjs";
-import {UserRoleToken} from "../../login/interfaces/Interfaces";
 
 @Injectable({
   providedIn: 'root'

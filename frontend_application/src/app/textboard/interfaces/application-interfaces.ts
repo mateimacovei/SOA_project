@@ -1,3 +1,8 @@
+export enum Role {
+  USER = 'user', ADMIN = 'admin'
+}
+
+
 // posts
 
 export interface PostCount {

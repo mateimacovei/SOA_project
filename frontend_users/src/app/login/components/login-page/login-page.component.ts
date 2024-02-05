@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {UserToastsAreaComponent} from "../user-toasts-area/user-toasts-area.component";
 import {UserToastService} from "../../service/userToast.service";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {UserPassword, UserRoleToken} from "../../interfaces/Interfaces";
 import {UserApiService} from "../../service/user-api.service";
+import {DOCUMENT} from "@angular/common";
 
 @Component({
   selector: 'app-login-page',
@@ -20,7 +21,7 @@ export class LoginPageComponent {
 
   userPasswordForm: FormGroup;
 
-  constructor(private userApi: UserApiService, private fb: FormBuilder, private toastService: UserToastService, private router: Router) {
+  constructor(private userApi: UserApiService, private fb: FormBuilder, private toastService: UserToastService, private router: Router,  @Inject(DOCUMENT) private document: Document) {
     this.userPasswordForm = this.fb.group({
       username: [''],
       password: ['']
@@ -53,7 +54,8 @@ export class LoginPageComponent {
     this.userPasswordForm.controls['username'].setValue('');
     this.userPasswordForm.controls['password'].setValue('');
 
-    this.router.navigate(['/textboard'])
+    // this.router.navigate(['/textboard'])
+    this.document.location.href = 'http://localhost:8080/application/textboard/textboard';
   }
 
   logIn() {
