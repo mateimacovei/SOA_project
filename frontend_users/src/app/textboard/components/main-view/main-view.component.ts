@@ -8,6 +8,7 @@ import {NgForOf} from "@angular/common";
 import {PostComponent} from "../post/post.component";
 import {RouterLink} from "@angular/router";
 import {Post} from "../../interfaces/application-interfaces";
+import {WebsocketListenerService} from "../../service/websocket-listener.service";
 
 @Component({
   selector: 'app-main-view',
@@ -31,7 +32,7 @@ export class MainViewComponent {
   // form
   newPostForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private toastService: ToastService, private postApi: PostApiService) {
+  constructor(private fb: FormBuilder, private toastService: ToastService, private postApi: PostApiService, private socketService: WebsocketListenerService) {
     this.newPostForm = this.fb.group({
       newPostTextArea: ['']
     })
