@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ToastService} from "./toast.service";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {Comment, NewComment, NewPost, Post} from "../interfaces/application-interfaces";
+import {Comment, NewComment} from "../interfaces/application-interfaces";
 import {lastValueFrom} from "rxjs";
 
 @Injectable({
